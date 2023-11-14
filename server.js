@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const ShortUrl = require("./models/shortUrl.js");
 const dotenv = require('dotenv')
 
-dotenv.config({
-  path:'./env'
-})
+dotenv.config();
 
 const app = express();
 
@@ -45,6 +43,7 @@ app.get("/:shortUrl", async (req, res) => {
   res.redirect(shortUrl.full);
 });
 
-app.listen(process.env.PORT || 3000, ()=>{
-console.log(`server is up and running at port number ${process.env.PORT}`)
+const port = process.env.PORT;
+app.listen(port, ()=>{
+console.log(`server is up and running at port number ${port}`)
 })
