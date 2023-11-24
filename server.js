@@ -12,7 +12,7 @@ const connectDB = async ()=>{
     const connectionInstance= await mongoose.connect(`mongodb://localhost/27017`)
     console.log(`\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`);
   } catch (error) {
-    console.log("mongodb connection failed at db/index.js", error);
+    console.log("mongodb connection failed mongodb connection", error);
     process.exit(1);
   }
 }
@@ -37,7 +37,7 @@ app.get("/:shortUrl", async (req, res) => {
   const shortUrl = await ShortUrl.findOne({ short: req.params.shortUrl });
  
   console.log(`after hitting short url`,shortUrl);
-  if (shortUrl == null) return res.sendStatus(404);
+  if (shortUrl == null) return res.sendStatus(401);
   shortUrl.clicks++;
   shortUrl.save();
   res.redirect(shortUrl.full);
